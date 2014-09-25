@@ -28,11 +28,15 @@ public class GsonDataManager implements IDataManager {
 	}
 
 	public ArrayList<Tweet> loadTweets() {
+		
 		ArrayList<Tweet> lts = new ArrayList<Tweet>();
 
 		try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(
 					ctx.openFileInput(FILENAME)));
+			
+			
+			
 			String line;
 			StringBuffer fileContent = new StringBuffer();
 
@@ -41,8 +45,12 @@ public class GsonDataManager implements IDataManager {
 			}
 
 			Type collectionType = new TypeToken<Collection<Tweet>>() {}.getType();
+			
+			//----------------
 			lts = gson.fromJson(fileContent.toString(), collectionType);
 
+			//----------------
+			
 		} catch (Exception e) {
 			Log.i("LonelyTwitter", "Error loading tweets");
 			e.printStackTrace();
